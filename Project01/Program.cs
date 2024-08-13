@@ -9,14 +9,23 @@ namespace Project01
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
+            var services = builder.Services;
+            var configuration = builder.Configuration;
 
-            builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+            var connectionString = configuration.GetConnectionString("ApplicationDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
 
-            builder.Services.AddDefaultIdentity<Project01User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+
+            services.AddDefaultIdentity<Project01User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            services.AddControllersWithViews();
+
+            services.AddAuthentication().AddGoogle(options =>
+            {
+                options.ClientId = configuration["Authentication:Google:ClientId"];
+                options.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+            });
 
             var app = builder.Build();
 
