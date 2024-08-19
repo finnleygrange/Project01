@@ -15,7 +15,8 @@ namespace Project01.Controllers
 
         public IActionResult Index()
 		{
-			return View();
+			List<Product> products = _context.Products.ToList();
+			return View(products);
 		}
 
 		public IActionResult Create()

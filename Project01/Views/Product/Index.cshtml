@@ -1,1 +1,23 @@
-﻿<h2>Product List</h2>
+﻿@model List<Product>
+
+<h2>Product List</h2>
+
+<table class="table table-striped table-bordered">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Price</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (Product product in Model)
+		{
+			<tr>
+				<td>@product.Name</td>
+				<td>@product.Description</td>
+				<td>@product.Price</td>
+			</tr>
+		}
+	</tbody>
+</table>
