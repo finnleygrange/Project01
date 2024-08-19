@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Project01.Areas.Identity.Data;
+using Project01.Models;
 
 namespace Project01.Data;
 
@@ -11,6 +12,8 @@ public class ApplicationDbContext : IdentityDbContext<Project01User>
         : base(options)
     {
     }
+
+    public DbSet<Product> Products { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
