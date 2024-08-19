@@ -1,0 +1,25 @@
+﻿@model Product
+
+
+<form method="post">
+	<div class="border p-3">
+		<div class="pb-3">
+			<h2>Create Product</h2>
+			<hr />
+		</div>
+		<div class="form-floating mb-3">
+			<input asp-for="Name" class="form-control" placeholder="Name"/>
+			<label asp-for="Name" class="form-label">Name</label>
+		</div>
+		<div class="form-floating mb-3">
+			<input asp-for="Description" class="form-control" placeholder="Description" />
+			<label asp-for="Description">Description</label>
+		</div>
+		<div class="form-floating mb-3">
+			<input asp-for="Price" class="form-control" placeholder="Price"/>
+			<label asp-for="Price">Price</label>
+		</div>
+		<button type="submit" class="btn btn-primary">Create</button>
+		<a class="btn btn-outline-secondary">Cancel</a>
+	</div>
+</form>
